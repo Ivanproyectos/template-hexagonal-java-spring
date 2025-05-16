@@ -55,4 +55,22 @@ mvn clean install
 ```
 
 # Para ejecutar la aplicación Spring Boot
-crea una configuracion de ejecución 
+
+Configuración para ejecutar la aplicación
+Antes de ejecutar, configura la Run/Debug Configuration en IntelliJ:
+
+Name: InfrastructureApplication
+
+JDK: Java 21
+
+Classpath (-cp): selecciona el módulo Infrastructure
+
+Main class: org.awesome.Infrastructure.InfrastructureApplication
+
+Working directory: apunta al directorio del módulo hexagonal-module
+
+(Opcional) Añade variables de entorno si es necesario.
+
+Guarda y ejecuta la configuración para iniciar la aplicación.
+
+![image](https://github.com/user-attachments/assets/72b55b7c-ebd1-48b9-94db-c989f562b0d2)
