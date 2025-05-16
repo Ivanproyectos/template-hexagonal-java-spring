@@ -1,9 +1,6 @@
 package org.awesome.dtos.category;
 
-import java.util.UUID;
-
-public record CategoryDto(
-        UUID id,
+public record UpdateCategoryRequest(
         String name,
         String description,
         String imageUrl,

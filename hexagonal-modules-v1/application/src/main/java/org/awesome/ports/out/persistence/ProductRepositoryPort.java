@@ -5,6 +5,6 @@ import org.awesome.models.Product;
 import java.util.List;
 
 public interface ProductRepositoryPort {
-    public List<Product> findAll();
+     List<Product> findAll();
     public Product save(Product product);
 }

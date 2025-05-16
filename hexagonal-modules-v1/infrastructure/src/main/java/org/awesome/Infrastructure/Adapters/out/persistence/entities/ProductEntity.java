@@ -17,11 +17,11 @@ public class ProductEntity {
         this.price = price;
     }
 
-    public static ProductEntity fromDomainModel(Product product) {
+/*    public static ProductEntity fromDomainModel(Product product) {
         return new ProductEntity(product.getId(), product.getName(), product.getDescription(), product.getPrice());
-    }
+    }*/
 
-    public Product toDomainModel() {
+ /*   public Product toDomainModel() {
         return new Product(id, name, description, price);
-    }
+    }*/
 }

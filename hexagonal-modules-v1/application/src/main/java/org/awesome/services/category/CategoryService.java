@@ -1,7 +1,8 @@
 package org.awesome.services.category;
 
-import org.awesome.dtos.category.CategoryDto;
-import org.awesome.dtos.category.CreateCategoryDto;
+import org.awesome.dtos.category.CategoryResponse;
+import org.awesome.dtos.category.CreateCategoryRequest;
+import org.awesome.mappers.CategoryMapper;
 import org.awesome.ports.in.category.CreateCategoryUsesCase;
 import org.awesome.ports.in.category.GetCategoryUsesCase;
 import org.awesome.ports.out.persistence.CategoryRepositoryPort;
@@ -12,6 +13,7 @@ import java.util.UUID;
 
 public class CategoryService implements CreateCategoryUsesCase, GetCategoryUsesCase {
 
+    private final CategoryMapper categoryMapper = CategoryMapper.INSTANCE;
     private final CategoryRepositoryPort categoryRepositoryPort;
 
     public CategoryService(CategoryRepositoryPort categoryRepositoryPort) {
@@ -19,49 +21,27 @@ public class CategoryService implements CreateCategoryUsesCase, GetCategoryUsesC
     }
 
     @Override
-    public CategoryDto createCategory(CreateCategoryDto createCategory) {
-        var category = new Category(
-                UUID.randomUUID(),
-                createCategory.name(),
-                createCategory.description(),
-                createCategory.imageUrl(), createCategory.isActive());
+    public CategoryResponse createCategory(CreateCategoryRequest createCategory) {
+        var category = categoryMapper.toDomain(createCategory);
+        category.setId(UUID.randomUUID());
 
         var categoryCreated = categoryRepositoryPort.save(category);
 
-        return new CategoryDto(
-                categoryCreated.getId(),
-                categoryCreated.getName(),
-                categoryCreated.getDescription(),
-                categoryCreated.getImageUrl(),
-                categoryCreated.getIsActive()
-        );
+        return categoryMapper.toDTO(categoryCreated);
     }
     @Override
-    public CategoryDto getCategoryById(UUID id) {
+    public CategoryResponse getCategoryById(UUID id) {
         var category = categoryRepositoryPort.findById(id);
         if (category == null) {
             return null;
         }
-        return new CategoryDto(
-                category.getId(),
-                category.getName(),
-                category.getDescription(),
-                category.getImageUrl(),
-                category.getIsActive()
-        );
+        return categoryMapper.toDTO(category);
     }
 
     @Override
-    public List<CategoryDto> getCategories() {
+    public List<CategoryResponse> getCategories() {
         var categories = categoryRepositoryPort.findAll();
-        return categories.stream()
-                .map(category -> new CategoryDto(
-                        category.getId(),
-                        category.getName(),
-                        category.getDescription(),
-                        category.getImageUrl(),
-                        category.getIsActive()))
-                .toList();
+        return categoryMapper.toDTOs(categories);
 
     }
 }

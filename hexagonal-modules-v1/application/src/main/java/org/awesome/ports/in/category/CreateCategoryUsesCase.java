@@ -1,9 +1,8 @@
 package org.awesome.ports.in.category;
 
-import org.awesome.dtos.category.CategoryDto;
-import org.awesome.dtos.category.CreateCategoryDto;
-import org.awesome.models.Category;
+import org.awesome.dtos.category.CategoryResponse;
+import org.awesome.dtos.category.CreateCategoryRequest;
 
 public interface CreateCategoryUsesCase {
-    public CategoryDto createCategory(CreateCategoryDto category);
+    public CategoryResponse createCategory(CreateCategoryRequest category);
 }

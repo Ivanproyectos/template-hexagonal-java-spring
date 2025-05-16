@@ -1,7 +1,9 @@
 package org.awesome.ports.in.product;
 
+import org.awesome.dtos.product.CreateProductRequest;
+import org.awesome.dtos.product.ProductResponse;
 import org.awesome.models.Product;
 
 public interface CreateProductUseCase {
-    public Product createProduct (Product product);
+    public ProductResponse createProduct (CreateProductRequest product);
 }

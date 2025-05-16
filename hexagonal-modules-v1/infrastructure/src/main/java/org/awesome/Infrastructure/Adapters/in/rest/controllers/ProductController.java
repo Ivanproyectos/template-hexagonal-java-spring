@@ -1,5 +1,7 @@
 package org.awesome.Infrastructure.Adapters.in.rest.controllers;
 
+import org.awesome.dtos.product.CreateProductRequest;
+import org.awesome.dtos.product.ProductResponse;
 import org.awesome.models.Product;
 import org.awesome.ports.in.product.CreateProductUseCase;
 import org.awesome.ports.in.product.GetProductUsesCase;
@@ -22,12 +24,12 @@ public class ProductController {
     }
 
     @PostMapping("/product")
-    public ResponseEntity<Product> createProduct(@RequestBody Product product) {
-        return ResponseEntity.ok(createProductUseCase.createProduct(product));
+    public ResponseEntity<ProductResponse> createProduct(@RequestBody CreateProductRequest createProductRequest) {
+        return ResponseEntity.ok(createProductUseCase.createProduct(createProductRequest));
     }
 
     @GetMapping("/product")
-    public ResponseEntity<List<Product>> getProduct() {
+    public ResponseEntity<List<ProductResponse>> getProduct() {
         return ResponseEntity.ok(getProductUsesCase.getProduct());
     }
 

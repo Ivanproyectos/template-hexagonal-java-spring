@@ -1,6 +1,6 @@
 package org.awesome.dtos.category;
 
-public record CreateCategoryDto(
+public record CreateCategoryRequest(
         String name,
         String description,
         String imageUrl,

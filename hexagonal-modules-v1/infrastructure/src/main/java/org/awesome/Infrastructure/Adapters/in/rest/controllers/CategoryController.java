@@ -1,14 +1,14 @@
 package org.awesome.Infrastructure.Adapters.in.rest.controllers;
 
-import org.awesome.dtos.category.CategoryDto;
-import org.awesome.dtos.category.CreateCategoryDto;
-import org.awesome.models.Category;
+import org.awesome.dtos.category.CategoryResponse;
+import org.awesome.dtos.category.CreateCategoryRequest;
 import org.awesome.ports.in.category.CreateCategoryUsesCase;
 import org.awesome.ports.in.category.GetCategoryUsesCase;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/category")
@@ -22,22 +22,20 @@ public class CategoryController {
     }
 
     @PostMapping
-    public ResponseEntity<CategoryDto> createCategory(@RequestBody CreateCategoryDto createCategoryRequest) {
-        Category category = Category.createCategory(
-                createCategoryRequest.name(),
-                createCategoryRequest.description(),
-                createCategoryRequest.imageUrl(),
-                createCategoryRequest.isActive()
-        );
-
-        CategoryDto createdCategory = createCategoryUsesCase.createCategory(createCategoryRequest);
+    public ResponseEntity<CategoryResponse> createCategory(@RequestBody CreateCategoryRequest createCategoryRequest) {
+        CategoryResponse createdCategory = createCategoryUsesCase.createCategory(createCategoryRequest);
 
         return  ResponseEntity.ok(createdCategory);
     }
     @GetMapping
-    public ResponseEntity<List<CategoryDto>> getCategories() {
+    public ResponseEntity<List<CategoryResponse>> getCategories() {
         var categories = getCategoryUsesCase.getCategories();
-
         return ResponseEntity.ok(categories);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<CategoryResponse> getCategory(@PathVariable UUID id) {
+        var category = getCategoryUsesCase.getCategoryById(id);
+        return ResponseEntity.ok(category);
     }
 }
