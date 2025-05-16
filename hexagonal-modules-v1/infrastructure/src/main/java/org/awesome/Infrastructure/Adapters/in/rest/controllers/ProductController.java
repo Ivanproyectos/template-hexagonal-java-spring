@@ -1,5 +1,6 @@
 package org.awesome.Infrastructure.Adapters.in.rest.controllers;
 
+import jakarta.validation.Valid;
 import org.awesome.dtos.product.CreateProductRequest;
 import org.awesome.dtos.product.ProductResponse;
 import org.awesome.models.Product;
@@ -24,7 +25,7 @@ public class ProductController {
     }
 
     @PostMapping("/product")
-    public ResponseEntity<ProductResponse> createProduct(@RequestBody CreateProductRequest createProductRequest) {
+    public ResponseEntity<ProductResponse> createProduct(@RequestBody @Valid CreateProductRequest createProductRequest) {
         return ResponseEntity.ok(createProductUseCase.createProduct(createProductRequest));
     }
 
