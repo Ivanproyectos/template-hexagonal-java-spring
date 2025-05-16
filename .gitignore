@@ -1,33 +1,62 @@
-HELP.md
-target/
-!.mvn/wrapper/maven-wrapper.jar
-!**/src/main/**/target/
-!**/src/test/**/target/
+# Compiled class files
+*.class
 
-### STS ###
-.apt_generated
-.classpath
-.factorypath
+# Log files
+*.log
+
+# BlueJ files
+*.ctxt
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# Package Files #
+*.jar
+*.war
+*.ear
+
+# Maven target folder
+/target/
+
+# Gradle build folder
+/build/
+
+# Eclipse files
 .project
-.settings
-.springBeans
-.sts4-cache
+.classpath
+.settings/
+bin/
 
-### IntelliJ IDEA ###
-.idea
-*.iws
+# IntelliJ IDEA files
 *.iml
-*.ipr
+*.iws
+.idea/
+out/
 
-### NetBeans ###
-/nbproject/private/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
-build/
-!**/src/main/**/build/
-!**/src/test/**/build/
-
-### VS Code ###
+# VS Code files
 .vscode/
+
+# Mac system files
+.DS_Store
+
+# Windows system files
+Thumbs.db
+ehthumbs.db
+
+# Spring Boot specific
+spring.log
+spring-boot-*.jar
+
+# Dependency directories
+/node_modules/
+bower_components/
+
+# Generated files
+/generated/
+
+# Others
+*.swp
+*~
+
+# Environment files
+.env

@@ -1,7 +1,7 @@
 package org.awesome.Infrastructure.Adapters.in.rest.controllers;
 
-import org.awesome.Infrastructure.Adapters.in.rest.dtos.Request.category.CreateCategoryRequest;
-import org.awesome.Infrastructure.Adapters.in.rest.dtos.Response.CategoryResponse;
+import org.awesome.dtos.category.CategoryDto;
+import org.awesome.dtos.category.CreateCategoryDto;
 import org.awesome.models.Category;
 import org.awesome.ports.in.category.CreateCategoryUsesCase;
 import org.awesome.ports.in.category.GetCategoryUsesCase;
@@ -22,7 +22,7 @@ public class CategoryController {
     }
 
     @PostMapping
-    public ResponseEntity<CategoryResponse> createCategory(@RequestBody CreateCategoryRequest createCategoryRequest) {
+    public ResponseEntity<CategoryDto> createCategory(@RequestBody CreateCategoryDto createCategoryRequest) {
         Category category = Category.createCategory(
                 createCategoryRequest.name(),
                 createCategoryRequest.description(),
@@ -30,29 +30,14 @@ public class CategoryController {
                 createCategoryRequest.isActive()
         );
 
-        Category createdCategory = createCategoryUsesCase.createCategory(category);
-        CategoryResponse categoryResponse = new CategoryResponse(
-                createdCategory.getId(),
-                createdCategory.getName(),
-                createdCategory.getDescription(),
-                createdCategory.getImageUrl(),
-                createdCategory.getIsActive()
-        );
-        return  ResponseEntity.ok(categoryResponse);
+        CategoryDto createdCategory = createCategoryUsesCase.createCategory(createCategoryRequest);
+
+        return  ResponseEntity.ok(createdCategory);
     }
     @GetMapping
-    public ResponseEntity<List<CategoryResponse>> getCategories() {
+    public ResponseEntity<List<CategoryDto>> getCategories() {
         var categories = getCategoryUsesCase.getCategories();
 
-        List<CategoryResponse> categoryResponses = categories.stream()
-                .map(category -> new CategoryResponse(
-                        category.getId(),
-                        category.getName(),
-                        category.getDescription(),
-                        category.getImageUrl(),
-                        category.getIsActive()
-                ))
-                .toList();
-        return ResponseEntity.ok(categoryResponses);
+        return ResponseEntity.ok(categories);
     }
 }
