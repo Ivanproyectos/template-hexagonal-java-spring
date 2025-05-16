@@ -1,8 +1,7 @@
 package org.awesome.Infrastructure.Adapters.out.persistence.entities;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import org.awesome.Models.Product;
+import org.awesome.models.Product;
 
 @Data
 public class ProductEntity {
